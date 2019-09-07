@@ -5,7 +5,7 @@ import { PdfService } from './pdf.service';
   selector: 'app-pdf',
   templateUrl: './pdf.component.html',
   styleUrls: ['./pdf.component.css']
-})
+}) 
 export class PdfComponent  {
   data: any;
   constructor(private pdfservice:PdfService) {
@@ -23,7 +23,15 @@ export class PdfComponent  {
   }
 
   getpdf() {
-  	  	this.data=this.pdfservice.getpdf();
+    this.pdfservice.getpdf().subscribe(result=>{
+      console.log('result is ', result);
+      if(result['message'] === 'Files retrieved successfully.') {
+        alert('Successfully retrieved')
+         }
+          else {
+        alert('not uretrieved');
+      }
+    })
   }
     
   
