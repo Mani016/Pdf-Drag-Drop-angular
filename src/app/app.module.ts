@@ -3,16 +3,29 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { RootComponent } from './root/root.component';
+import { PdfComponent } from './pdf/pdf.component';
+import {HttpModule} from '@angular/http';
+import{NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule} from "@angular/forms";  
+import { HttpClientModule } from '@angular/common/http';
+import { NgxFileDropModule } from 'ngx-file-drop';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    RootComponent,
+    PdfComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule,NgbModule,FormsModule,HttpClientModule,NgxFileDropModule
   ],
-  providers: [],
+  providers: [RootComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
