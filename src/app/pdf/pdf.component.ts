@@ -1,37 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { PdfService } from './pdf.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-pdf',
   templateUrl: './pdf.component.html',
   styleUrls: ['./pdf.component.css']
 }) 
 export class PdfComponent  {
-  data: any;
+  data:any;
   constructor(private pdfservice:PdfService) {
     }
   uploadpdf(){
-    this.pdfservice.uploadpdf().subscribe(result=>{
-      console.log('result is ', result);
-      if(result['message'] === 'Successfull') {
-        alert('Successful uploaded')
-         }
-          else {
-        alert('not uploaded');
-      }
-    })
+    this.pdfservice.uploadpdf().subscribe((result) => {
+      console.log('result:',result);
+      this.data = result;
+    }, (err: HttpErrorResponse) => {
+      console.log(err);
+    });
   }
 
   getpdf() {
-    this.pdfservice.getpdf().subscribe(result=>{
-      console.log('result is ', result);
-      if(result['message'] === 'Files retrieved successfully.') {
-        alert('Successfully retrieved')
-         }
-          else {
-        alert('not uretrieved');
-      }
-    })
+      this.pdfservice.getpdf().subscribe((result) => {
+            console.log('result:',result);
+            this.data = result;
+          }, (err: HttpErrorResponse) => {
+            console.log(err);
+          });
   }
     
   
